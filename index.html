@@ -111,7 +111,10 @@
         .social-links {
             margin-top: auto;
             display: flex;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
         }
 
         .social-links a {
@@ -119,10 +122,16 @@
             text-decoration: none;
             font-size: 0.9em;
             transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
         }
 
         .social-links a:hover {
             color: var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         /* Sağ İçerik Alanı */
@@ -134,14 +143,13 @@
         }
 
         section {
-            display: none; /* Varsayılan olarak tüm bölümler gizli */
+            display: none;
             background: var(--card-bg);
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* Hareketli Animasyon Sınıfı */
         section.active-section {
             display: block;
             animation: slideUpFade 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
@@ -289,7 +297,6 @@
 
     <!-- Sol Menü -->
     <aside class="sidebar">
-        <!-- Fotoğraf ismini senin dosyana göre bıraktım -->
         <img src="proile.jpeg" alt="Mustafa Doğukan Alıcı" class="profile-img" onerror="this.src='https://via.placeholder.com/150?text=Photo'">
         <h1>M. DOĞUKAN ALICI</h1>
         <h2>Computer Engineer</h2>
@@ -303,8 +310,9 @@
         </nav>
 
         <div class="social-links">
-            <a href="mailto:dogukanalici0@gmail.com">Email</a>
-            <a href="https://github.com/DogukanAlici27" target="_blank">GitHub</a>
+            <a href="tel:+905053888589">📞 +90 505 388 85 89</a>
+            <a href="mailto:dogukanalici0@gmail.com">✉️ dogukanalici0@gmail.com</a>
+            <a href="https://github.com/DogukanAlici27" target="_blank">💻 GitHub</a>
         </div>
     </aside>
 
@@ -445,7 +453,7 @@
             // Sadece tıklanan bölümü göster (animasyon sınıfını ekle)
             document.getElementById(sectionId).classList.add('active-section');
             
-            // Tıklanan butonu aktif hale getir (mavi arka plan)
+            // Tıklanan butonu aktif hale getir
             buttonElement.classList.add('active');
         }
     </script>
