@@ -283,23 +283,19 @@
             background: linear-gradient(135deg, var(--accent), var(--accent-2));
             opacity: 0.12; z-index: 0;
         }
-        .monogram {
+        .avatar-img {
             position: relative; z-index: 1;
             aspect-ratio: 1; width: 100%;
-            border-radius: 16px;
-            background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 30%, var(--bg-2)), var(--bg-2));
-            display: grid; place-items: center;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: 38% center;
             margin-bottom: 20px;
-            border: 1px solid var(--border-strong);
+            border: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
+            box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent), 0 20px 50px -16px rgba(0,0,0,0.6);
+            filter: contrast(1.02) saturate(1.05);
+            transition: transform 0.5s var(--ease-out), filter var(--transition), box-shadow 0.5s var(--ease-out);
         }
-        .monogram span {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3rem, 12vw, 4.5rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent), var(--accent-3));
-            -webkit-background-clip: text; background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .avatar-card:hover .avatar-img { transform: scale(1.03); filter: contrast(1.05) saturate(1.1); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 20%, transparent), 0 24px 60px -16px rgba(0,0,0,0.7); }
         .avatar-card h3 { position: relative; z-index: 1; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600; }
         .avatar-card p { position: relative; z-index: 1; color: var(--muted); font-size: 0.92rem; }
         .avatar-meta { position: relative; z-index: 1; margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
@@ -518,7 +514,7 @@
             </div>
             <div class="about-grid">
                 <aside class="avatar-card reveal" data-delay="1">
-                    <div class="monogram"><span>DA</span></div>
+                    <img src="profile.jpg" alt="Mustafa Doğukan Alıcı" class="avatar-img" loading="eager">
                     <h3>Mustafa Doğukan Alıcı</h3>
                     <p>Computer Engineer</p>
                     <div class="avatar-meta">
@@ -734,8 +730,6 @@
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
         document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-        // Smooth active nav (optional subtle highlight handled by :hover)
     </script>
 </body>
 </html>
