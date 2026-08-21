@@ -215,7 +215,6 @@
             animation: rise 0.9s var(--ease-out) forwards;
         }
         .hero h1 .line:nth-child(2) .word { animation-delay: 0.12s; }
-        .hero h1 .line:nth-child(3) .word { animation-delay: 0.24s; }
         @keyframes rise { to { transform: translateY(0); } }
         .hero-role {
             font-family: 'Space Grotesk', sans-serif;
@@ -283,19 +282,31 @@
             background: linear-gradient(135deg, var(--accent), var(--accent-2));
             opacity: 0.12; z-index: 0;
         }
-        .avatar-img {
+        .avatar-wrap {
             position: relative; z-index: 1;
             aspect-ratio: 1; width: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: 38% center;
             margin-bottom: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, var(--bg-2)), color-mix(in srgb, var(--accent-2) 22%, var(--bg-2)));
             border: 3px solid color-mix(in srgb, var(--accent) 40%, transparent);
             box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent), 0 20px 50px -16px rgba(0,0,0,0.6);
-            filter: contrast(1.02) saturate(1.05);
-            transition: transform 0.5s var(--ease-out), filter var(--transition), box-shadow 0.5s var(--ease-out);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
         }
-        .avatar-card:hover .avatar-img { transform: scale(1.03); filter: contrast(1.05) saturate(1.1); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 20%, transparent), 0 24px 60px -16px rgba(0,0,0,0.7); }
+        .avatar-card:hover .avatar-wrap { transform: scale(1.03); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 20%, transparent), 0 24px 60px -16px rgba(0,0,0,0.7); }
+        .avatar-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: 50% 28%;
+            filter: contrast(1.02) saturate(1.05);
+        }
+        .avatar-wrap .avatar-fallback {
+            width: 100%; height: 100%;
+            display: grid; place-items: center;
+        }
+        .avatar-wrap .avatar-fallback svg { width: 46%; height: 46%; opacity: 0.9; }
         .avatar-card h3 { position: relative; z-index: 1; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600; }
         .avatar-card p { position: relative; z-index: 1; color: var(--muted); font-size: 0.92rem; }
         .avatar-meta { position: relative; z-index: 1; margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
@@ -514,7 +525,16 @@
             </div>
             <div class="about-grid">
                 <aside class="avatar-card reveal" data-delay="1">
-                    <img src="profile.jpg" alt="Mustafa Doğukan Alıcı" class="avatar-img" loading="eager">
+                    <div class="avatar-wrap">
+                        <!-- If profile.jpg exists it loads; otherwise the monogram fallback shows. -->
+                        <img src="profile.jpg" alt="Mustafa Doğukan Alıcı" loading="eager"
+                             onerror="this.style.display='none';this.parentElement.querySelector('.avatar-fallback').style.display='grid';">
+                        <div class="avatar-fallback" style="display:none">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="DA monogram">
+                                <text x="50" y="62" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="40" font-weight="700" fill="var(--accent)">DA</text>
+                            </svg>
+                        </div>
+                    </div>
                     <h3>Mustafa Doğukan Alıcı</h3>
                     <p>Computer Engineer</p>
                     <div class="avatar-meta">
